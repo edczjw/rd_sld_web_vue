@@ -27,11 +27,26 @@ html {
 }
 
 body {
+  background-image: url('../src/assets/city.jpg');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
   height: 100%;
+  overflow-y: scroll;
 }
-
 #app {
   height: 100%;
 }
 
+.phone{
+    position: absolute;
+    font-family: '苹方';
+    right: 2%;
+    top: 2%;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    color: rgb(62, 72, 160);
+}
 </style>

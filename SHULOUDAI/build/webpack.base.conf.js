@@ -4,6 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 
+const webpack = require('webpack')
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -12,8 +13,9 @@ function resolve (dir) {
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
+  //这里
   entry: {
-    app: './src/main.js'
+    app: ['babel-polyfill', './src/main.js']
   },
   output: {
     path: config.build.assetsRoot,
@@ -29,6 +31,12 @@ module.exports = {
       '@': resolve('src'),
     }
   },
+  plugins:[
+    new webpack.ProvidePlugin({
+      $:"jquery",
+      jquery:"jquery"
+    })
+  ],
   module: {
     rules: [
       {
