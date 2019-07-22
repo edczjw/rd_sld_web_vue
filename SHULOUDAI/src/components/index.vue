@@ -24,37 +24,158 @@
           <p v-if="this.action==3? true:false">预览</p>
         </div>
         <!-- 基本信息 -->
-        <div class="mess">
+        <div v-if="this.action==1? true:false"  class="mess">
           <el-form :model="setForm" status-icon ref="setForm" class="demo-ruleForm">
                 <el-form-item prop="mobile" :rules="rules.kong">
                   姓名
                     <el-input size="small" v-model.trim="setForm.mobile" auto-complete="off"></el-input>
-                    <span>请确保您的姓名与身份证上的信息保持一致</span>
+                    <span><i class="el-icon-info"></i> 请确保您的姓名与身份证上的信息保持一致</span>
                 </el-form-item>
 
                 <el-form-item prop="pass" :rules="rules.phone">
                   电话
                     <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
+                    <span><i class="el-icon-info"></i> 请确保输入正确格式的手机号码</span>
                 </el-form-item>
 
                 <el-form-item prop="pass" :rules="rules.checkid">
                   身份证号码
                     <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
+                    <span><i class="el-icon-info"></i> 请确保您的身份证号码与身份证上的信息保持一致</span>
                 </el-form-item>
 
                 <el-form-item prop="pass" :rules="rules.kong">
                   银行卡号
                     <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
+                    <span><i class="el-icon-info"></i> 请确保输入正确格式的银行卡号</span>
                 </el-form-item>
             </el-form>
-                <div class="but" @click="login('setForm')">下一步</div>
+                <div class="nextbut" @click="next('setForm')">下一步</div>
+        </div>
+
+        <!-- 影像资料 -->
+        <div v-if="this.action==2? true:false" class="mess">
+                
+                <el-button size="mini" type="primary">身份证正面照</el-button>
+                <el-row class="table-row">
+                <el-col :span="4">
+                  <el-upload
+                    class="avatar-uploader"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-upload>
+                </el-col>
+                </el-row>
+
+                <el-button size="mini" type="primary">身份证反面照</el-button>
+                <el-row class="table-row">
+                <el-col :span="4">
+                  <el-upload
+                    class="avatar-uploader"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-upload>
+                </el-col>
+                </el-row>
+
+                <el-button size="mini" type="primary">业务办理照片</el-button>
+                <el-row class="table-row">
+                <el-col :span="4">
+                  <el-upload
+                    class="avatar-uploader"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-upload>
+                </el-col>
+                </el-row>
+                <el-button size="mini" type="primary">借款合同</el-button>
+                <el-row class="table-row">
+                <el-col :span="4">
+                  <el-upload
+                    class="avatar-uploader"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-upload>
+                </el-col>
+                </el-row>
+                <el-button size="mini" type="primary">委托合同</el-button>
+                <el-row class="table-row">
+                <el-col :span="4">
+                  <el-upload
+                    class="avatar-uploader"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-upload>
+                </el-col>
+                </el-row>
+                <el-button size="mini" type="primary">质押合同</el-button>
+                <el-row class="table-row">
+                <el-col :span="4">
+                  <el-upload
+                    class="avatar-uploader"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :show-file-list="false"
+                    :on-success="handleAvatarSuccess"
+                    :before-upload="beforeAvatarUpload">
+                    <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-upload>
+                </el-col>
+                </el-row>
+                <div class="nextbut" @click="next('setForm')">下一步</div>
+        </div>
+
+        <!-- 预览 -->
+        <div v-if="this.action==3? true:false" class="mess">
+          <el-form :model="setForm" status-icon ref="setForm" class="demo-ruleForm">
+                <el-form-item prop="mobile" :rules="rules.kong">
+                  姓名
+                    <el-input size="small" v-model.trim="setForm.mobile" auto-complete="off"></el-input>
+                    <span><i class="el-icon-info"></i> 请确保您的姓名与身份证上的信息保持一致</span>
+                </el-form-item>
+
+                <el-form-item prop="pass" :rules="rules.phone">
+                  电话
+                    <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
+                    <span><i class="el-icon-info"></i> 请确保输入正确格式的手机号码</span>
+                </el-form-item>
+
+                <el-form-item prop="pass" :rules="rules.checkid">
+                  身份证号码
+                    <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
+                    <span><i class="el-icon-info"></i> 请确保您的身份证号码与身份证上的信息保持一致</span>
+                </el-form-item>
+
+                <el-form-item prop="pass" :rules="rules.kong">
+                  银行卡号
+                    <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
+                    <span><i class="el-icon-info"></i> 请确保输入正确格式的银行卡号</span>
+                </el-form-item>
+            </el-form>
+                <div class="nextbut" @click="next('setForm')">下一步</div>
         </div>
 
       </el-card>
-    </div>
-
-    <div class="bottom">
-      <p>© 版权所有。民盛互联网小额贷款有限公司。 不得转载。</p>
     </div>
   </div>
 </template>
@@ -66,23 +187,64 @@ export default {
   data () {
     return {
       rules,  
-      action:'1',
+      action:'2',
       username: '小米',
+       imageUrl: '',
       setForm:{
         mobile:"",
         pass:""
       }
     }
-  }
+  },
+  methods: {
+    handleAvatarSuccess(res, file) {
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      beforeAvatarUpload(file) {
+        const isJPG = file.type === 'image/jpeg';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error('上传头像图片只能是 JPG 格式!');
+        }
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isJPG && isLt2M;
+      },
+    next(formName){
+      this.$refs[formName].validate((valid) => {
+          if (valid) {
+
+             } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+
+    }
+  },
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
 .mess{
-  padding: 50px;
-  .span{
+  padding: 20px 70px;
+  span{
     font-size: 12px;
+  }
+  .nextbut{
+    width:80%;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    background: rgb(175, 48, 48);
+    color: #fff;
+    cursor: pointer;
+  }
+  .nextbut:hover{
+    background: rgb(204, 39, 39);
   }
 }
 .cute-tip{
@@ -97,11 +259,13 @@ export default {
 .mo{
   width: 100%;
   height: 50px;
+  z-index: 999;
   line-height: 50px;
   background: #fff;
   position: absolute;
   top: 30px;
-  padding: 0 20%;
+  padding: 0 18%;
+  border-bottom: 1px solid #eee;
   p{
     font-size: 28px;
     line-height: 50px;
@@ -112,6 +276,7 @@ export default {
 }
 .top-banner{
   width: 100%;
+  z-index: 999;
   height: 30px;
   line-height: 30px;
   background: rgb(26, 24, 24);
@@ -121,18 +286,19 @@ export default {
   p{
     color: #fff;
     position: absolute;
-    right: 20%;
+    right: 18%;
     font-size: 14px;
   }
 }
 .card{
-  width: 60%;
+  width: 65%;
   margin: 0 auto;
   height: 100%;
-  margin-top: 15px;
+  margin-top: 10px;
+  padding: 0 0 45px;
   .card1{
     width: 18%;
-    height: 97%;
+    height: 95%;
     float: left;
     position: relative;
     text-align: center;
@@ -149,23 +315,20 @@ export default {
   .card2{
     width: 81%;
     float: right;
-    height: 97%;
+    height: 100%;
+    overflow-y: scroll;
   }
 }
 .index{
+  background-image: url('../assets/city.jpg');
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-position: center center;
+  background-size: cover;
     width: 100%;
     height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     padding: 80px 0 0;
 }
-.bottom{
-  position: relative;
-  width: 100%;
-  bottom: 0;
-  background: rgb(26, 24, 24);
-  height: 50px;
-  line-height:50px;
-  text-align: center;
-  color: #fff;
-}
+
 </style>

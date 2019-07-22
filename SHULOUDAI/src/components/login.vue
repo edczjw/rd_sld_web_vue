@@ -102,7 +102,7 @@ h2{
 }
 .box-card{
     position: absolute;
-    left: 33%;
+    left: 35%;
     top: 18%;
     width: 520px;
     height: 350px;
