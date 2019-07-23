@@ -1,7 +1,8 @@
 <template>
   <div class="index">
     <div class="top-banner">
-    <p>Hi~{{this.username}}</p>
+    <p style="cursor:pointer;"><i class="el-icon-location-outline"></i> Hi~{{this.username}}</p>
+    <span  @click="goBack" title="安全退出"  style="cursor:pointer;"><i class="el-icon-remove-outline"></i> 退出</span>
     </div>
     <div class="mo">
       <p>民盛赎楼贷信息平台</p>
@@ -275,6 +276,14 @@ export default {
         
       }
     },
+    //退出登陆
+    goBack() {
+      this.$confirm('确认退出吗?', '提示', {
+            }).then(() => {
+              this.$router.push('/login');
+            }).catch(() => {
+      });
+    },
     handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
@@ -347,17 +356,17 @@ export default {
           height: 240px;
         }
       }
+      .el-col:hover{
+      background: rgb(230, 228, 228);
+    }
   }
   .messrow{
       text-align: center;
-      border: 1px solid #ccc;
+      border-top: 1px solid #ccc;
+      border-left: 1px solid #ccc;
       border-bottom: none;
       border-right: none;
-      margin-top: 10px;
-      &:last-child {
-        margin-bottom: 0;
-        border-bottom: none;
-      }
+      // margin-top: 10px;
     .el-col{
       cursor: pointer;
       border-bottom: 1px solid #ccc;
@@ -366,17 +375,18 @@ export default {
       line-height: 40px;
     }
     .el-col:hover{
-      background: #ccc;
+      background: rgb(230, 228, 228);
     }
   }
 }
 .cute-tip{
   width: 100%;
   padding-left: 10px;
-  height: 28px;
-  line-height: 28px;
-  border-left: 3px solid rgb(143, 92, 92);
+  height: 38px;
+  line-height: 38px;
+  border-left: 4px solid rgb(143, 92, 92);
   background: #eee;
+  font-weight: bolder;
   
 }
 .mo{
@@ -390,7 +400,7 @@ export default {
   padding: 0 18%;
   border-bottom: 1px solid #eee;
   p{
-    font-size: 28px;
+    font-size: 32px;
     line-height: 50px;
     font-weight: bolder;
     font-family: 'Times New Roman', Times, serif;
@@ -412,22 +422,31 @@ export default {
     right: 18%;
     font-size: 14px;
   }
+  p:hover{
+    color: rgb(143, 110, 110);
+  }
+  span{
+    color: #fff;
+    font-size: 14px;
+    position: absolute;
+    left: 18%;
+  }
+  span:hover{
+    color: rgb(143, 110, 110);
+  }
 }
 .card{
   width: 65%;
   margin: 0 auto;
-  height: 100%;
   margin-top: 10px;
   padding: 0 0 45px;
   .card1{
-    width: 18%;
-    height: 95%;
+    width: 16%;
+    height: 100%;
     float: left;
-    position: relative;
     text-align: center;
     .step{
-      position: absolute;
-      height: 80%;
+      height: 600px;
       width: 80%;
       text-align: center;
       .el-step__title {
@@ -436,18 +455,13 @@ export default {
     }
   }
   .card2{
-    width: 81%;
+    width: 83%;
     float: right;
     height: 100%;
-    overflow-y: scroll;
+    margin-bottom: 100px;
   }
 }
 .index{
-  background-image: url('../assets/city.jpg');
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: center center;
-  background-size: cover;
     width: 100%;
     height: 100%;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

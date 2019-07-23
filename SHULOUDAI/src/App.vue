@@ -4,12 +4,40 @@
     <div class="bottom">
       <p>© 版权所有。民盛互联网小额贷款有限公司。 不得转载。</p>
     </div>
+    <div id="dtop"  class="move-top" title="返回顶部"  @click="movetop">
+      返回顶部
+    </div>
   </div>
 </template>
 
 <script>
+import $ from 'jquery'
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      
+    }
+  },
+  mounted() {
+    window.addEventListener('scroll', this.returntop, true);  // 监听（绑定）滚轮滚动事件
+  },
+  methods: {
+    movetop(){
+          $('body,html').animate({scrollTop: 0 }, 300);
+    },
+     //返回顶部
+    returntop(){
+    //返回顶部
+    var htop= document.documentElement.scrollTop;//获取滚动高度
+    //判断滚动条滚动长度
+    if(htop > 350) {
+      $(".move-top").stop().fadeIn();
+    }else{
+      $(".move-top").stop().fadeOut();
+    }
+    },
+  },
 }
 </script>
 
@@ -31,13 +59,33 @@ html {
 
 body {
   height: 100%;
-  overflow: hidden;
+  background-image: url('../src/assets/city.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
 }
 #app {
   height: 100%;
-  overflow: hidden;
 }
+.move-top{
+  z-index: 9999;
+  display: none;
 
+  cursor: pointer;
+  position: fixed;
+  width: 100px;
+  height: 30px;
+  line-height:30px;
+  background: #409EFF;
+  text-align: center;
+  color: #fff;
+  right: 15px;
+  bottom: 50px;
+}
+.move-top:hover{
+  background: rgb(50, 148, 228);
+}
 .bottom{
   position: fixed;
   width: 100%;

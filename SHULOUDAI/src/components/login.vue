@@ -6,7 +6,7 @@
     <el-card class="box-card">
     <div class="tit">登录</div>
         <div class="insert">
-            <el-form :model="setForm" status-icon ref="setForm" label-width="100px" class="demo-ruleForm">
+            <el-form :model="setForm" status-icon ref="setForm" label-width="70px" class="demo-ruleForm">
                 <el-form-item label="账号" prop="mobile" :rules="rules.phone">
                     <el-input v-model.trim="setForm.mobile" auto-complete="off"></el-input>
                 </el-form-item>
@@ -101,8 +101,9 @@ h2{
     padding: 40px 28px 0px;
 }
 .box-card{
-    position: absolute;
-    left: 35%;
+    position: relative;
+    /* left: 33%; */
+    margin: 0 auto;
     top: 18%;
     width: 520px;
     height: 350px;
