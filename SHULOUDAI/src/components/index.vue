@@ -26,27 +26,27 @@
         <!-- 基本信息 -->
         <div v-if="this.action==1? true:false"  class="mess">
           <el-form :model="setForm" status-icon ref="setForm" class="demo-ruleForm">
-                <el-form-item prop="mobile" :rules="rules.kong">
+                <el-form-item prop="name" :rules="rules.kong">
                   姓名
-                    <el-input size="small" v-model.trim="setForm.mobile" auto-complete="off"></el-input>
+                    <el-input size="small" v-model.trim="setForm.name" auto-complete="off"></el-input>
                     <span><i class="el-icon-info"></i> 请确保您的姓名与身份证上的信息保持一致</span>
                 </el-form-item>
 
-                <el-form-item prop="pass" :rules="rules.phone">
+                <el-form-item prop="phone" :rules="rules.phone">
                   电话
-                    <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
+                    <el-input size="small" v-model.trim="setForm.phone"></el-input>
                     <span><i class="el-icon-info"></i> 请确保输入正确格式的手机号码</span>
                 </el-form-item>
 
-                <el-form-item prop="pass" :rules="rules.checkid">
+                <el-form-item prop="idcard" :rules="rules.checkid">
                   身份证号码
-                    <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
+                    <el-input size="small" v-model.trim="setForm.idcard"></el-input>
                     <span><i class="el-icon-info"></i> 请确保您的身份证号码与身份证上的信息保持一致</span>
                 </el-form-item>
 
-                <el-form-item prop="pass" :rules="rules.kong">
+                <el-form-item prop="bankid" :rules="rules.kong">
                   银行卡号
-                    <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
+                    <el-input size="small" v-model.trim="setForm.bankid"></el-input>
                     <span><i class="el-icon-info"></i> 请确保输入正确格式的银行卡号</span>
                 </el-form-item>
             </el-form>
@@ -55,7 +55,6 @@
 
         <!-- 影像资料 -->
         <div v-if="this.action==2? true:false" class="mess">
-                
                 <el-button size="mini" type="primary">身份证正面照</el-button>
                 <el-row class="table-row">
                 <el-col :span="4">
@@ -142,37 +141,99 @@
                   </el-upload>
                 </el-col>
                 </el-row>
-                <div class="nextbut" @click="next('setForm')">下一步</div>
+                <div class="nextbut" @click="next2()">下一步</div>
         </div>
 
         <!-- 预览 -->
         <div v-if="this.action==3? true:false" class="mess">
-          <el-form :model="setForm" status-icon ref="setForm" class="demo-ruleForm">
-                <el-form-item prop="mobile" :rules="rules.kong">
-                  姓名
-                    <el-input size="small" v-model.trim="setForm.mobile" auto-complete="off"></el-input>
-                    <span><i class="el-icon-info"></i> 请确保您的姓名与身份证上的信息保持一致</span>
-                </el-form-item>
+                <el-row class="messrow">
+                  <el-col :span="6">
+                    姓名
+                  </el-col>
+                  <el-col :span="18">
+                    {{setForm.name}}
+                  </el-col>
+                </el-row>
+                <el-row class="messrow">
+                  <el-col  :span="6">
+                    电话号码
+                  </el-col>
+                  <el-col  :span="18">
+                    {{setForm.phone}}
+                  </el-col>
+                </el-row>
+                <el-row class="messrow">
+                  <el-col  :span="6">
+                    身份证号码
+                  </el-col>
+                  <el-col  :span="18">
+                    {{setForm.idcard}}
+                  </el-col>
+                </el-row>
+                <el-row class="messrow">
+                  <el-col  :span="6">
+                    银行卡号
+                  </el-col>
+                  <el-col  :span="18">
+                    {{setForm.bankid}}
+                  </el-col>
+                </el-row>
 
-                <el-form-item prop="pass" :rules="rules.phone">
-                  电话
-                    <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
-                    <span><i class="el-icon-info"></i> 请确保输入正确格式的手机号码</span>
-                </el-form-item>
+                <el-row class="imgrow">
+                  <el-col  :span="6">
+                    身份证正面照
+                  </el-col>
+                  <el-col  :span="18">
+                    <img src="../assets/city.jpg" alt="">
+                  </el-col>
+                </el-row>
 
-                <el-form-item prop="pass" :rules="rules.checkid">
-                  身份证号码
-                    <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
-                    <span><i class="el-icon-info"></i> 请确保您的身份证号码与身份证上的信息保持一致</span>
-                </el-form-item>
+                <el-row class="imgrow">
+                  <el-col  :span="6">
+                    身份证反面照
+                  </el-col>
+                  <el-col  :span="18">
+                    <img src="../assets/city.jpg" alt="">
+                  </el-col>
+                </el-row>
 
-                <el-form-item prop="pass" :rules="rules.kong">
-                  银行卡号
-                    <el-input size="small" type="password" v-model.trim="setForm.pass"></el-input>
-                    <span><i class="el-icon-info"></i> 请确保输入正确格式的银行卡号</span>
-                </el-form-item>
-            </el-form>
-                <div class="nextbut" @click="next('setForm')">下一步</div>
+                <el-row class="imgrow">
+                  <el-col  :span="6">
+                    业务办理照片
+                  </el-col>
+                  <el-col  :span="18">
+                    <img src="../assets/city.jpg" alt="">
+                  </el-col>
+                </el-row>
+
+                <el-row class="imgrow">
+                  <el-col  :span="6">
+                    借款合同
+                  </el-col>
+                  <el-col  :span="18">
+                    <img src="../assets/city.jpg" alt="">
+                  </el-col>
+                </el-row>
+
+                <el-row class="imgrow">
+                  <el-col  :span="6">
+                    委托合同
+                  </el-col>
+                  <el-col  :span="18">
+                    <img src="../assets/city.jpg" alt="">
+                  </el-col>
+                </el-row>
+
+                <el-row class="imgrow">
+                  <el-col  :span="6">
+                    质押合同
+                  </el-col>
+                  <el-col  :span="18">
+                    <img src="../assets/city.jpg" alt="">
+                  </el-col>
+                </el-row>
+
+                <div class="nextbut" @click="next2()">提交</div>
         </div>
 
       </el-card>
@@ -187,16 +248,33 @@ export default {
   data () {
     return {
       rules,  
-      action:'2',
+      action:'3',
       username: '小米',
        imageUrl: '',
       setForm:{
-        mobile:"",
-        pass:""
+        name:"",
+        phone:"",
+        idcard:"",
+        bankid:""
       }
     }
   },
   methods: {
+    next2(){
+      if(this.action=='2'){
+        this.action='3';
+      }else if(this.action=='3'){
+        this.$alert('成功!', '提交信息', {
+          confirmButtonText: '确定',
+          center: true,
+          type: 'success',
+          callback: action => {
+            this.action='1';
+          }
+        });
+        
+      }
+    },
     handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
       },
@@ -215,7 +293,11 @@ export default {
     next(formName){
       this.$refs[formName].validate((valid) => {
           if (valid) {
-
+              if(this.action=='1'){
+                this.action='2';
+              }else if(this.action=='2'){
+                this.action='3';
+              }
              } else {
             console.log('error submit!!');
             return false;
@@ -235,7 +317,7 @@ export default {
     font-size: 12px;
   }
   .nextbut{
-    width:80%;
+    width:60%;
     padding: 10px;
     text-align: center;
     margin: 0 auto;
@@ -245,6 +327,47 @@ export default {
   }
   .nextbut:hover{
     background: rgb(204, 39, 39);
+  }
+  .imgrow{
+      text-align: center;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-right: none;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      .el-col{
+        cursor: pointer;
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        height: 240px;
+        line-height: 240px;
+        
+        img{
+          width: 360px;
+          height: 240px;
+        }
+      }
+  }
+  .messrow{
+      text-align: center;
+      border: 1px solid #ccc;
+      border-bottom: none;
+      border-right: none;
+      margin-top: 10px;
+      &:last-child {
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+    .el-col{
+      cursor: pointer;
+      border-bottom: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      height: 40px;
+      line-height: 40px;
+    }
+    .el-col:hover{
+      background: #ccc;
+    }
   }
 }
 .cute-tip{

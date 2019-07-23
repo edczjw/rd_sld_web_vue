@@ -7,11 +7,11 @@
     <div class="tit">登录</div>
         <div class="insert">
             <el-form :model="setForm" status-icon ref="setForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="输入手机号" prop="mobile" :rules="rules.phone">
+                <el-form-item label="账号" prop="mobile" :rules="rules.phone">
                     <el-input v-model.trim="setForm.mobile" auto-complete="off"></el-input>
                 </el-form-item>
 
-                <el-form-item label="输入密码" prop="pass" :rules="rules.kong">
+                <el-form-item label="密码" prop="pass" :rules="rules.kong">
                     <el-input type="password" v-model.trim="setForm.pass"></el-input>
                 </el-form-item>
             </el-form>
