@@ -72,7 +72,7 @@
           <el-button size="mini" type="primary">身份证正面照</el-button>
           <el-row class="table-row">
             <el-col :span="4">
-              <el-upload
+              <!-- <el-upload
                 class="avatar-uploader"
                 action
                 drag
@@ -86,7 +86,27 @@
               >
                 <img v-if="imageUrl" :src="imageUrl" class="avatar" />
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+              </el-upload>-->
+              <el-upload
+                class="avatar-uploader"
+                drag
+                :limit="12"
+                :http-request="Upload6"
+                :file-list="fileList6"
+                :on-exceed="handleExceed6"
+                :before-upload="beforeAvatarUpload6"
+                :on-change="handleChange6"
+                multiple
+                action
+              >
+                <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
+              <el-progress
+                v-if="videoFlag6"
+                :percentage="videoUploadPercent6"
+                style="margin-top:30px;"
+              ></el-progress>
             </el-col>
           </el-row>
 
@@ -246,7 +266,7 @@ export default {
       rules,
       fileList1: [], //文件容器
       videoFlag1: false, //进度条
-      cooperativeClients: [], //
+      idcardFront: "", //
       videoUploadPercent1: 0,
       action: 2,
       username: "小米",
@@ -256,13 +276,13 @@ export default {
         phone: "",
         idcard: "",
         bankid: "",
-        cooperativeClients: []
+        idcardFront: ""
       }
     };
   },
   methods: {
     //上传身份证正面
-    Upload1(file) {
+    Upload6(file) {
       var _that = this;
       this.videoFlag1 = true;
       const OSS = require("ali-oss");
@@ -287,10 +307,11 @@ export default {
             accessKeySecret: response.data.secretKey, // OSS 密码
             bucket: response.data.bucket // 阿里云上存储的 Bucket
           });
+
           // 存储路径，并且给图片改成唯一名字
           var fileName = file.file.name;
 
-          this.cooperativeClients.push(fileName);
+          this.receivables.push(fileName);
 
           //后缀名
           const suffix = fileName.substr(fileName.indexOf("."));
@@ -302,6 +323,8 @@ export default {
           const obj2 = this.timestamp1();
 
           //获取企业编号
+          // const enterpriseNo = sessionStorage.getItem("enterpriseNo");
+
           const storeAs =
             "test/sld/userinfo/" +
             obj +
@@ -310,10 +333,9 @@ export default {
             "-" +
             fileName;
 
-          this.setForm.cooperativeClients.push(
-            "http://mssaas.oss-cn-shenzhen.aliyuncs.com/" + storeAs
+          this.setForm.receivables.push(
+            "http://slloan.oss-cn-shenzhen.aliyuncs.com/" + storeAs
           );
-          console.log(this.setForm.cooperativeClients);
 
           //上传
           client
@@ -331,8 +353,7 @@ export default {
                 //返回服务器文件url
                 // console.log(res.url)
                 this.videoFlag1 = false;
-                _that.videoUploadPercent1 = 0;
-
+                _that.videoUploadPercent1= 0;
                 this.$notify({
                   title: "上传结果",
                   type: "success",
