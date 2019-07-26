@@ -99,11 +99,11 @@
                 multiple
                 action
               >
-                <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                <img v-if="imageUrl" :src="setForm.idcardFront" class="avatar" />
                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
               </el-upload>
               <el-progress
-                v-if="videoFlag6"
+                v-if="true"
                 :percentage="videoUploadPercent6"
                 style="margin-top:30px;"
               ></el-progress>
@@ -267,7 +267,7 @@ export default {
       fileList1: [], //文件容器
       videoFlag1: false, //进度条
       idcardFront: "", //
-      videoUploadPercent1: 0,
+      videoUploadPercent6: 0,
       action: 2,
       username: "小米",
       imageUrl: "",
@@ -298,7 +298,10 @@ export default {
       }).then(
         response => {
           // 向后台发请求 拉取OSS相关配置
-
+          console.log(response.data.extranet)
+          console.log(response.data.secretId)
+          console.log(response.data.secretKey)
+          console.log(response.data.bucket)
           //后端提供数据
           const client = new OSS({
             region: "oss-cn-shenzhen", // 服务器集群地区
@@ -311,7 +314,7 @@ export default {
           // 存储路径，并且给图片改成唯一名字
           var fileName = file.file.name;
 
-          this.receivables.push(fileName);
+          // this.receivables.push(fileName);
 
           //后缀名
           const suffix = fileName.substr(fileName.indexOf("."));
@@ -333,9 +336,8 @@ export default {
             "-" +
             fileName;
 
-          this.setForm.receivables.push(
-            "http://slloan.oss-cn-shenzhen.aliyuncs.com/" + storeAs
-          );
+          this.setForm.idcardFront =
+            "http://slloan.oss-cn-shenzhen.aliyuncs.com" + storeAs;
 
           //上传
           client
@@ -343,7 +345,7 @@ export default {
               progress: function(p) {
                 //获取进度条的值
                 // console.log(p)
-                _that.videoUploadPercent1 = p * 100;
+                _that.videoUploadPercent6 = p * 100;
               }
             })
             .then(res => {
@@ -352,8 +354,8 @@ export default {
 
                 //返回服务器文件url
                 // console.log(res.url)
-                this.videoFlag1 = false;
-                _that.videoUploadPercent1= 0;
+                // this.videoFlag1 = false;
+                _that.videoUploadPercent6= 0;
                 this.$notify({
                   title: "上传结果",
                   type: "success",
